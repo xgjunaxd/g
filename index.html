@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Dr. Vikram Shenoy | Orthopedic Surgeon</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            min-height: 100vh;
+            /* Required Gradient Transition */
+            background: linear-gradient(
+                180deg, 
+                #43DBE7 0%, 
+                #3EC4D0 30%, 
+                #393C83 70%, 
+                #2A2C5F 100%
+            );
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        /* Glassmorphism Container */
+        .glass-hero {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            border-radius: 24px;
+            padding: 32px 24px;
+            width: 100%;
+            max-width: 480px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+            text-align: center;
+            color: #ffffff;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        /* Semantic Image Placeholder */
+        .hero-image-placeholder {
+            width: 100%;
+            height: 220px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.05) 100%);
+            border-radius: 16px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px dashed rgba(255, 255, 255, 0.6);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-image-placeholder span {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.9rem;
+            font-weight: 400;
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .hero-image-placeholder svg {
+            width: 32px;
+            height: 32px;
+            opacity: 0.8;
+        }
+
+        /* Typography */
+        h1 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            line-height: 1.3;
+            letter-spacing: -0.5px;
+        }
+
+        p {
+            font-size: 1rem;
+            font-weight: 300;
+            margin-bottom: 28px;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Buttons */
+        .btn-group {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .btn {
+            padding: 16px 24px;
+            border-radius: 14px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            border: none;
+        }
+
+        .btn-primary {
+            background: #ffffff;
+            color: #393C83;
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+
+        /* Interactive states for touch/click */
+        .btn:active {
+            transform: scale(0.97);
+        }
+
+        .btn-primary:active {
+            background: #f0f0f0;
+        }
+
+        .btn-secondary:active {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Minor adjustments for slightly wider screens */
+        @media (min-width: 400px) {
+            .glass-hero { padding: 40px 32px; }
+            h1 { font-size: 2rem; }
+        }
+/* UPDATE TO GLOBAL BODY FIX STACKING */
+        body {
+            flex-direction: column;
+            gap: 24px;
+            padding: 40px 20px;
+            height: auto;
+        }
+
+        /* ABOUT SECTION STYLES */
+        .glass-about {
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 24px;
+            padding: 32px 24px;
+            width: 100%;
+            max-width: 480px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+            color: #ffffff;
+            opacity: 0; /* Starts hidden for JS scroll effect */
+            transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        /* Class added by JS to trigger animation */
+        .glass-about.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .about-header {
+            text-align: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+            padding-bottom: 16px;
+        }
+
+        .about-header h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .qualifications {
+            color: #43DBE7; /* Matches top gradient */
+            font-weight: 500;
+            font-size: 0.95rem;
+            margin-bottom: 4px;
+        }
+
+        .fellowship {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 0;
+        }
+
+        .experience-badge {
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.02) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .experience-badge .years {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #3EC4D0;
+            line-height: 1;
+        }
+
+        .experience-badge .exp-text {
+            font-size: 0.9rem;
+            line-height: 1.3;
+            color: rgba(255, 255, 255, 0.9);
+            text-align: left;
+            margin: 0;
+        }
+
+        .bio {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            font-weight: 300;
+            font-style: italic;
+            position: relative;
+            padding-left: 16px;
+            border-left: 3px solid #43DBE7;
+            color: rgba(255, 255, 255, 0.95);
+        }
+/* SERVICES & TREATMENTS STYLES */
+        .services-container {
+            width: 100%;
+            max-width: 480px; /* Aligns with previous sections on mobile */
+            color: #ffffff;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+            color: #ffffff;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: 1fr; /* Single column on mobile */
+            gap: 16px;
+        }
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 24px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease, background 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Subtle glass hover effect */
+        .service-card:active, .service-card:hover {
+            transform: translateY(-4px);
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .card-icon {
+            background: linear-gradient(135deg, #43DBE7 0%, #3EC4D0 100%);
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+            color: #2A2C5F;
+            box-shadow: 0 4px 15px rgba(67, 219, 231, 0.3);
+        }
+
+        .card-icon svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .service-card h3 {
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #ffffff;
+        }
+
+        .service-card p {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 0;
+            font-weight: 300;
+        }
+
+        /* Tablet/Desktop Grid Adjustment */
+        @media (min-width: 600px) {
+            .services-container {
+                max-width: 800px;
+            }
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+        }
+/* TESTIMONIALS STYLES */
+        .testimonials-container {
+            width: 100%;
+            max-width: 100vw; /* Allows full width for carousel */
+            margin-left: -20px; /* Offset the body padding for full-bleed scroll */
+            margin-right: -20px;
+            padding-left: 20px;
+            padding-right: 20px;
+            box-sizing: content-box;
+        }
+
+        .testimonial-carousel {
+            display: flex;
+            gap: 16px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding-bottom: 24px;
+            /* Hide scrollbar for cleaner look */
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .testimonial-carousel::-webkit-scrollbar {
+            display: none;
+        }
+
+        .testimonial-card {
+            flex: 0 0 85%; /* Shows a hint of the next card */
+            max-width: 340px;
+            scroll-snap-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 20px;
+            padding: 28px 24px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .quote-mark {
+            position: absolute;
+            top: 20px;
+            right: 24px;
+            width: 32px;
+            height: 32px;
+            color: rgba(255, 255, 255, 0.15);
+        }
+
+        .stars {
+            color: #FFD700;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+        }
+
+        .review-text {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.95);
+            font-style: italic;
+            font-weight: 300;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .patient-name {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #43DBE7;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Desktop Adjustment for Testimonials */
+        @media (min-width: 600px) {
+            .testimonials-container {
+                max-width: 800px;
+                margin: 0 auto;
+                padding: 0;
+            }
+            .testimonial-carousel {
+                justify-content: center;
+                flex-wrap: wrap;
+                overflow-x: visible;
+            }
+            .testimonial-card {
+                flex: 1 1 300px;
+            }
+        }
+/* CONTACT & FOOTER STYLES */
+        .glass-contact {
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 24px;
+            padding: 32px 24px;
+            width: 100%;
+            max-width: 480px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+            color: #ffffff;
+            margin-bottom: 24px;
+        }
+
+        .contact-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .info-item svg {
+            width: 24px;
+            height: 24px;
+            color: #43DBE7;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .info-item strong {
+            display: block;
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: 4px;
+            color: #ffffff;
+        }
+
+        .info-item p {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: rgba(255, 255, 255, 0.85);
+            margin: 0;
+        }
+
+        /* Glassmorphism Form Inputs */
+        .booking-form {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .glass-input {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 12px;
+            padding: 14px 16px;
+            font-size: 0.95rem;
+            color: #ffffff;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            transition: all 0.3s ease;
+            outline: none;
+            font-family: inherit;
+        }
+
+        /* Changes placeholder color to be readable */
+        .glass-input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Date picker icon color fix for webkit browsers */
+        ::-webkit-calendar-picker-indicator {
+            filter: invert(1);
+            opacity: 0.7;
+            cursor: pointer;
+        }
+
+        .glass-input:focus {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: #43DBE7;
+            box-shadow: 0 0 0 3px rgba(67, 219, 231, 0.2);
+        }
+
+        textarea.glass-input {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .submit-btn {
+            margin-top: 8px;
+            border: none; /* Inherits .btn-primary base styles */
+        }
+
+        /* Footer Styles */
+        .site-footer {
+            text-align: center;
+            padding: 24px 0;
+            width: 100%;
+            max-width: 480px;
+        }
+
+        .site-footer p {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin: 0;
+        }
+
+        /* Desktop/Tablet Adjustment */
+        @media (min-width: 800px) {
+            .glass-contact {
+                max-width: 800px;
+                padding: 40px;
+            }
+            .contact-wrapper {
+                flex-direction: row;
+                align-items: stretch;
+            }
+            .contact-info, .booking-form {
+                flex: 1;
+            }
+            .site-footer {
+                max-width: 800px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <main class="glass-hero">
+        <figure class="hero-image-placeholder" aria-label="Dr. Shenoy reviewing an X-ray">
+            <span>
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                </svg>
+                [Image: Dr. Shenoy reviewing X-ray]
+            </span>
+        </figure>
+
+        <h1>Advanced Orthopedic Care You Can Trust</h1>
+        <p>Regain your mobility and live pain-free with expert joint, spine, and sports injury treatments.</p>
+
+        <div class="btn-group">
+            <a href="#" class="btn btn-primary" onclick="handleAction(event, 'appointment')">
+                Book an Appointment
+            </a>
+            <a href="#" class="btn btn-secondary" onclick="handleAction(event, 'whatsapp')">
+                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
+                </svg>
+                WhatsApp Us
+            </a>
+        </div>
+<!-- ABOUT DOCTOR SECTION -->
+    <section class="glass-about" id="about">
+        <div class="about-header">
+            <h2>Dr. Vikram Shenoy</h2>
+            <p class="qualifications">MBBS, MS - Orthopedics</p>
+            <p class="fellowship">Fellowship in Minimally Invasive Joint Replacement</p>
+        </div>
+        
+        <div class="experience-badge">
+            <span class="years">15+</span>
+            <span class="exp-text">Years in Clinical &<br>Surgical Orthopedics</span>
+        </div>
+
+        <blockquote class="bio">
+            "I believe that movement is life. My practice is built on the philosophy that surgery should be the last resort, not the first option. I focus on comprehensive, personalized rehabilitation plans to get my patients back on their feet safely. When surgery is necessary, I utilize the latest minimally invasive techniques so you can recover faster and get back to doing what you love."
+        </blockquote>
+    </section>
+<!-- SERVICES & TREATMENTS SECTION -->
+    <section class="services-container" id="services">
+        <h2 class="section-title">Services & Treatments</h2>
+        
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="card-icon">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+                </div>
+                <h3>Total Joint Replacement</h3>
+                <p>Advanced knee and hip replacement surgeries with rapid-recovery protocols.</p>
+            </div>
+
+            <div class="service-card">
+                <div class="card-icon">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                </div>
+                <h3>Sports Medicine</h3>
+                <p>Treatment for ligament tears (ACL/MCL), tendonitis, and athletic injuries.</p>
+            </div>
+
+            <div class="service-card">
+                <div class="card-icon">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path></svg>
+                </div>
+                <h3>Spine & Back Care</h3>
+                <p>Solutions for herniated discs, sciatica, and chronic lower back pain.</p>
+            </div>
+
+            <div class="service-card">
+                <div class="card-icon">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                </div>
+                <h3>Arthritis Management</h3>
+                <p>Comprehensive care plans including joint injections, physical therapy, and medication.</p>
+            </div>
+
+            <div class="service-card">
+                <div class="card-icon">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+                </div>
+                <h3>Fracture & Trauma Care</h3>
+                <p>Emergency and reconstructive treatment for broken bones and complex fractures.</p>
+            </div>
+        </div>
+    </section>
+<!-- TESTIMONIALS SECTION -->
+    <section class="testimonials-container" id="testimonials">
+        <h2 class="section-title">Patient Success Stories</h2>
+        
+        <div class="testimonial-carousel">
+            <!-- Testimonial 1 -->
+            <div class="testimonial-card">
+                <div class="quote-mark">
+                    <svg fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+                </div>
+                <div class="stars">
+                    ★★★★★
+                </div>
+                <p class="review-text">"Dr. Shenoy gave me my life back. The knee replacement was smoother than I ever imagined, and I was walking without pain in just a few weeks!"</p>
+                <p class="patient-name">— Rajesh K.</p>
+            </div>
+
+            <!-- Testimonial 2 -->
+            <div class="testimonial-card">
+                <div class="quote-mark">
+                    <svg fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+                </div>
+                <div class="stars">
+                    ★★★★★
+                </div>
+                <p class="review-text">"Very patient and compassionate. He took the time to explain my MRI results in a way I could actually understand instead of rushing me out the door."</p>
+                <p class="patient-name">— Priya S.</p>
+            </div>
+
+            <!-- Testimonial 3 -->
+            <div class="testimonial-card">
+                <div class="quote-mark">
+                    <svg fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+                </div>
+                <div class="stars">
+                    ★★★★★
+                </div>
+                <p class="review-text">"State-of-the-art clinic with a doctor who truly cares about your long-term recovery. The WhatsApp booking was also incredibly convenient."</p>
+                <p class="patient-name">— Anil M.</p>
+            </div>
+        </div>
+    </section>
+<!-- CONTACT & FOOTER SECTION -->
+    <section class="glass-contact" id="contact">
+        <h2 class="section-title">Book Your Consultation</h2>
+        
+        <div class="contact-wrapper">
+            <!-- Contact Information -->
+            <div class="contact-info">
+                <div class="info-item">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <div>
+                        <strong>Working Hours</strong>
+                        <p>Mon - Sat: 9:00 AM – 7:00 PM<br>(Sunday: Emergencies Only)</p>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                    <div>
+                        <strong>Phone / WhatsApp</strong>
+                        <p>+91 98765 43210</p>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                    <div>
+                        <strong>Email</strong>
+                        <p>appointments@shenoyorthocare.in</p>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.243-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                    <div>
+                        <strong>Address</strong>
+                        <p>Shenoy Ortho Care, 45 Health Avenue, Bangalore, Karnataka.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Booking Form -->
+            <form class="booking-form" onsubmit="event.preventDefault(); alert('Appointment requested successfully!');">
+                <input type="text" class="glass-input" placeholder="Full Name" required>
+                <input type="tel" class="glass-input" placeholder="Phone Number" required>
+                <input type="date" class="glass-input" required>
+                <textarea class="glass-input" rows="3" placeholder="Briefly describe your condition" required></textarea>
+                <button type="submit" class="btn btn-primary submit-btn">Request Appointment</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <p>&copy; 2026 Dr. Vikram Shenoy. All rights reserved.</p>
+    </footer>
+    </main>
+
+    <script>
+        // Simple handler to demonstrate interaction in the mobile editor
+        function handleAction(event, action) {
+            event.preventDefault();
+            const btn = event.currentTarget;
+            const originalText = btn.innerHTML;
+            
+            // Visual feedback
+            btn.style.opacity = '0.7';
+            
+            if (action === 'appointment') {
+                btn.innerHTML = 'Opening Scheduler...';
+            } else {
+                btn.innerHTML = 'Opening WhatsApp...';
+            }
+
+            // Reset after 1 second
+            setTimeout(() => {
+                btn.style.opacity = '1';
+                btn.innerHTML = originalText;
+            }, 1000);
+        }
+// Scroll Reveal Logic for the About Section
+        document.addEventListener("DOMContentLoaded", () => {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target); // Run once
+                    }
+                });
+            }, observerOptions);
+
+            const aboutSection = document.getElementById('about');
+            if (aboutSection) {
+                observer.observe(aboutSection);
+            }
+        });
+    </script>
+</body>
+</html>
